@@ -39,3 +39,30 @@ console.log(serialized);
 
 let deserialized = deserialize(serialized);
 console.log(deserialized);
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    let lazyImages = [].slice.call(document.querySelectorAll("img.lazyload"));
+
+    function lazyLoad() {
+        lazyImages.forEach(function(image) {
+            if (image.getBoundingClientRect().top < window.innerHeight && image.getBoundingClientRect().bottom > 0) {
+                image.src = image.dataset.src;
+                image.classList.remove("lazyload");
+                lazyImages = lazyImages.filter(img => img !== image);
+            }
+        });
+
+        if (lazyImages.length === 0) {
+            document.removeEventListener("scroll", lazyLoad);
+            window.removeEventListener("resize", lazyLoad);
+            window.removeEventListener("orientationchange", lazyLoad);
+        }
+    }
+
+    document.addEventListener("scroll", lazyLoad);
+    window.addEventListener("resize", lazyLoad);
+    window.addEventListener("orientationchange", lazyLoad);
+
+    lazyLoad(); // Run on page load
+});

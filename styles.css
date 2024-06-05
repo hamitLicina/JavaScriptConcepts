@@ -71,3 +71,8 @@
     animation-direction: alternate;
 }
 
+.lazyload {
+    width: 500px;
+    height: auto;
+}
+
