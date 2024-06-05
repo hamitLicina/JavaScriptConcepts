@@ -3,10 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'" />
+    <link
+      rel="stylesheet"
+      href="styles.css"
+      media="print"
+      onload="this.media='all'"
+    />
     <noscript><link rel="stylesheet" href="styles.css" /></noscript>
     <title>JavaScript</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        margin: 100px auto;
+        transform: translate(0, 0);
+        animation: moveAndRotate 5s infinite;
+      }
+
+      @keyframes moveAndRotate {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        50% {
+          transform: translate(100px, 100px) rotate(180deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(360deg);
+        }
+      }
+    </style>
   </head>
+
   <body>
     <header>
       <h1>Your Website Name</h1>
@@ -21,8 +49,14 @@
         <!-- Main content goes here -->
         <form action="/submit" method="post">
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required pattern="[A-Za-z0–9]+" />
-
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            pattern="[A-Za-z0–9]+"
+          />
+          <div class="box"></div>
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required />
 
