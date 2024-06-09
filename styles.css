@@ -1,78 +1,85 @@
 .translate {
-    transform: translate(50px, 100px);
+  transform: translate(50px, 100px);
 }
 
 .rotate {
-    transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .scale {
-    transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 .skew {
-    transform: skew(20deg, 10deg);
+  transform: skew(20deg, 10deg);
 }
 
 .multiple {
-    transform: translate(50px, 100px) rotate(45deg) scale(1.5);
+  transform: translate(50px, 100px) rotate(45deg) scale(1.5);
 }
 
 .rotateX {
-    transform: rotateX(45deg);
+  transform: rotateX(45deg);
 }
 
 .rotateY {
-    transform: rotateY(45deg);
+  transform: rotateY(45deg);
 }
 
 .perspective {
-    perspective: 500px;
+  perspective: 500px;
 }
 
 .transform-origin {
-    transform-origin: top left;
+  transform-origin: top left;
 }
 
 @keyframes example {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .animate {
-    animation: example 4s infinite;
+  animation: example 4s infinite;
 }
 
 .animation-name {
-    animation-name: example;
+  animation-name: example;
 }
 
 .animation-duration {
-    animation-duration: 4s;
+  animation-duration: 4s;
 }
 
 .animation-timing-function {
-    animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
 }
 
 .animation-delay {
-    animation-delay: 2s;
+  animation-delay: 2s;
 }
 
 .animation-iteration-count {
-    animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
 }
 
 .animation-direction {
-    animation-direction: alternate;
+  animation-direction: alternate;
 }
 
 .lazyload {
-    width: 500px;
-    height: auto;
+  width: 500px;
+  height: auto;
 }
 
+#myCanvas {
+  overflow: hidden;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/167451/1797393.png)
+    no-repeat center center fixed;
+  background-size: cover;
+  text-align: center;
+}
