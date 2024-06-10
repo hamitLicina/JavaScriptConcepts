@@ -174,3 +174,33 @@ function capturePhoto() {
     console.log("ImageCapture nesnesi henüz hazır değil.");
   }
 }
+
+const audioContext = new AudioContext();
+
+// Dış ses dosyası yüklemek
+fetch('audio.mp3')
+  .then(response => response.arrayBuffer())
+  .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+  .then(audioBuffer => {
+    const source = audioContext.createBufferSource();
+    source.buffer = audioBuffer;
+    source.connect(audioContext.destination);
+    source.start();
+  })
+  .catch(error => console.error('Ses dosyası yükleme hatası:', error));
+
+  // Ses kaynağı oluştur
+const oscillator = audioContext.createOscillator();
+oscillator.frequency.value = 440; // 440 Hz
+oscillator.type = 'sine'; // Sine dalga formu
+
+// Ses efekti ekle (örneğin, yankı efekti)
+const delay = audioContext.createDelay();
+delay.delayTime.value = 0.5; // 500 ms
+
+// Ses kaynağını bağla
+oscillator.connect(delay);
+delay.connect(audioContext.destination);
+
+// Ses oynat
+oscillator.start();
