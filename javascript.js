@@ -100,3 +100,77 @@ function deleteData() {
     alert("Data deleted.");
   });
 }
+
+navigator.mediaDevices
+  .getUserMedia({ video: true })
+  .then((stream) => {
+    // Video akışını video elementine bağlayın
+    const videoElement = document.querySelector("video");
+    videoElement.srcObject = stream;
+  })
+  .catch((error) => {
+    console.error("Kameraya erişim başarısız:", error);
+  });
+
+imageCapture
+  .takePhoto()
+  .then((blob) => {
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(blob);
+    document.body.appendChild(img);
+  })
+  .catch((error) => {
+    console.error("Fotoğraf çekme başarısız:", error);
+  });
+
+// Odak ayarlarını al
+imageCapture
+  .getPhotoCapabilities()
+  .then((capabilities) => {
+    console.log("Odak mesafesi aralığı:", capabilities.focusMode);
+  })
+  .catch((error) => {
+    console.error("Kamera özelliklerini alma başarısız:", error);
+  });
+
+// Parlaklık ayarını değiştir
+imageCapture
+  .setOptions({ brightness: 0.5 })
+  .then(() => {
+    console.log("Parlaklık ayarı başarıyla değiştirildi");
+  })
+  .catch((error) => {
+    console.error("Parlaklık ayarını değiştirme başarısız:", error);
+  });
+
+let imageCapture;
+
+navigator.mediaDevices
+  .getUserMedia({ video: true })
+  .then((stream) => {
+    const videoElement = document.querySelector("video");
+    videoElement.srcObject = stream;
+
+    const track = stream.getVideoTracks()[0];
+    imageCapture = new ImageCapture(track);
+  })
+  .catch((error) => {
+    console.error("Kameraya erişim başarısız:", error);
+  });
+
+function capturePhoto() {
+  if (imageCapture) {
+    imageCapture
+      .takePhoto()
+      .then((blob) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(blob);
+        document.body.appendChild(img);
+      })
+      .catch((error) => {
+        console.error("Fotoğraf çekme başarısız:", error);
+      });
+  } else {
+    console.log("ImageCapture nesnesi henüz hazır değil.");
+  }
+}
