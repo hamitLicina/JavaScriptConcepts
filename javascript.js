@@ -178,21 +178,21 @@ function capturePhoto() {
 const audioContext = new AudioContext();
 
 // Dış ses dosyası yüklemek
-fetch('audio.mp3')
-  .then(response => response.arrayBuffer())
-  .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
-  .then(audioBuffer => {
+fetch("audio.mp3")
+  .then((response) => response.arrayBuffer())
+  .then((arrayBuffer) => audioContext.decodeAudioData(arrayBuffer))
+  .then((audioBuffer) => {
     const source = audioContext.createBufferSource();
     source.buffer = audioBuffer;
     source.connect(audioContext.destination);
     source.start();
   })
-  .catch(error => console.error('Ses dosyası yükleme hatası:', error));
+  .catch((error) => console.error("Ses dosyası yükleme hatası:", error));
 
-  // Ses kaynağı oluştur
+// Ses kaynağı oluştur
 const oscillator = audioContext.createOscillator();
 oscillator.frequency.value = 440; // 440 Hz
-oscillator.type = 'sine'; // Sine dalga formu
+oscillator.type = "sine"; // Sine dalga formu
 
 // Ses efekti ekle (örneğin, yankı efekti)
 const delay = audioContext.createDelay();
@@ -204,3 +204,19 @@ delay.connect(audioContext.destination);
 
 // Ses oynat
 oscillator.start();
+
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+let x = 0;
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(x, 50, 50, 50);
+  x += 1;
+  if (x > canvas.width) {
+    x = 0;
+  }
+  requestAnimationFrame(animate);
+}
+
+animate();

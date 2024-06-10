@@ -82,4 +82,5 @@
     no-repeat center center fixed;
   background-size: cover;
   text-align: center;
+  border: 1px solid black;
 }
