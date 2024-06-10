@@ -51,9 +51,7 @@
 
     <main>
       <article>
-        <canvas
-          id="myCanvas">HTML5 canvas support
-        </canvas>
+        <canvas id="myCanvas">HTML5 canvas support </canvas>
         <form action="/submit" method="post">
           <label for="username">Username:</label>
           <input
@@ -75,6 +73,11 @@
 
     <footer>
       <!-- Footer content goes here -->
+      <button onclick="initializeDatabase()">Initialize Database</button>
+      <button onclick="insertData()">Insert Data</button>
+      <button onclick="readData()">Read Data</button>
+      <button onclick="updateData()">Update Data</button>
+      <button onclick="deleteData()">Delete Data</button>
     </footer>
 
     <script>
@@ -106,5 +109,6 @@
     </script>
 
     <script src="script.js" defer></script>
+    <script src="javascript.js" defer></script>
   </body>
 </html>
