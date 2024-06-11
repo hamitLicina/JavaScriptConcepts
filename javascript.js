@@ -266,3 +266,16 @@ if (typeof EventSource !== "undefined") {
 } else {
   console.log("Your browser does not support Server-Sent Events.");
 }
+
+const observer = new PerformanceObserver((list) => {
+  const entries = list.getEntriesByType("img");
+  entries.forEach((entry) => {
+    console.log(`Resource: ${entry.name}`);
+    console.log(`    Fetch Start: ${entry.fetchStart}`);
+    console.log(`    Response End: ${entry.responseEnd}`);
+    console.log(`    Duration: ${entry.duration}`);
+  });
+});
+
+// Resource timing girişlerini dinlemeye başla
+observer.observe({ entryTypes: ["img"] });
