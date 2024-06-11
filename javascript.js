@@ -220,3 +220,49 @@ function animate() {
 }
 
 animate();
+
+const http = NodeRequire("https");
+
+http
+  .createServer((req, res) => {
+    if (req.headers.accept && req.headers.accept === "text/event-stream") {
+      if (req.url === "/events") {
+        res.writeHead(200, {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          Connection: "keep-alive",
+        });
+
+        // Veri gönderme
+        setInterval(() => {
+          res.write(`data: ${new Date().toLocaleTimeString()}\n\n`);
+        }, 1000);
+
+        // Bağlantı kapandığında temizleme
+        req.on("close", () => {
+          clearInterval(interval);
+          res.end();
+        });
+      }
+    } else {
+      res.writeHead(404);
+      res.end();
+    }
+  })
+  .listen(3000, () => {
+    console.log("SSE server running on port 3000");
+  });
+
+if (typeof EventSource !== "undefined") {
+  const eventSource = new EventSource("/events");
+
+  eventSource.onmessage = function (event) {
+    document.getElementById("time").innerText = "Current Time: " + event.data;
+  };
+
+  eventSource.onerror = function (event) {
+    console.error("Error occurred: ", event);
+  };
+} else {
+  console.log("Your browser does not support Server-Sent Events.");
+}
