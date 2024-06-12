@@ -279,3 +279,20 @@ const observer = new PerformanceObserver((list) => {
 
 // Resource timing girişlerini dinlemeye başla
 observer.observe({ entryTypes: ["img"] });
+
+if ("PerformanceObserver" in window) {
+  const observer = new PerformanceObserver((list) => {
+    const entries = list.getEntries();
+    entries.forEach((entry) => {
+      console.log(`Long Task detected: `);
+      console.log(`    Name: ${entry.name}`);
+      console.log(`    Start Time: ${entry.startTime}`);
+      console.log(`    Duration: ${entry.duration}`);
+    });
+  });
+
+  observer.observe({ entryTypes: ["longtask"] });
+} else {
+  console.log("PerformanceObserver is not supported in this browser.");
+}
+
